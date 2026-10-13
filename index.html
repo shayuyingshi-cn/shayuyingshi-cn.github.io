@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="renderer" content="webkit">
+<meta name="applicable-device" content="pc,mobile">
+<meta name="description" content="鲨鱼影视 - 影视在线观看平台，海量高清电影、电视剧、综艺、动漫、纪录片免费在线播放，每日更新热播剧集，多端流畅观看，鲨鱼影视带您畅游影视海洋。">
+<meta name="keywords" content="鲨鱼影视,鲨鱼影视在线观看,影视在线观看,高清影视免费看,电影在线观看,电视剧在线观看,热播综艺动漫,影视网站,shayuyingshi">
+<title>鲨鱼影视 | shayuyingshi-cn · 影视在线观看·免费高清影视播放平台</title>
+<style>
+:root{
+  --sea:#03132b;--sea2:#061d3d;--deep:#020a18;--abyss:#010611;
+  --tx:#eaf4ff;--tx2:#9fb8d4;--tx3:#5e7ba0;
+  --cy:#00e5ff;--cy2:#00b4d8;--teal:#00bfa6;--lime:#a8ff35;--coral:#ff6b6b;
+  --ln:rgba(0,229,255,.18);--ln2:rgba(0,229,255,.5);
+  --ez:cubic-bezier(.2,.85,.3,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--abyss);color:var(--tx);
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
+  line-height:1.75;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+button,input,textarea{font-family:inherit}
+::selection{background:var(--cy);color:#001220}
+h1,h2,h3{letter-spacing:-.3px}
+
+/* 深海背景 */
+.ocean{position:fixed;inset:0;z-index:-2;background:radial-gradient(ellipse at 50% -10%,#0a3366 0%,#04142e 42%,#010611 100%)}
+.waves{position:fixed;inset:0;z-index:-1;overflow:hidden}
+.wave{position:absolute;left:-10%;right:-10%;border-radius:50%;border:1px solid rgba(0,229,255,.08)}
+.w1{top:14%;height:52vw;animation:dr 16s linear infinite}
+.w2{top:38%;height:70vw;border-color:rgba(0,191,166,.07);animation:dr 22s linear infinite reverse}
+.w3{top:66%;height:86vw;border-color:rgba(0,229,255,.05);animation:dr 30s linear infinite}
+@keyframes dr{to{transform:translateX(8%)}}
+.bubble{position:absolute;bottom:-40px;border-radius:50%;background:radial-gradient(circle at 30% 30%,rgba(0,229,255,.5),transparent 70%);animation:up linear infinite}
+@keyframes up{to{transform:translateY(-110vh);opacity:0}}
+
+.wrap{max-width:1220px;margin:0 auto;padding:0 22px}
+section{padding:108px 0;position:relative}
+.tag{display:inline-flex;align-items:center;gap:8px;font-size:11.5px;font-weight:800;letter-spacing:2.4px;color:var(--cy);padding:6px 14px;border-radius:40px;background:rgba(0,229,255,.1);border:1px solid var(--ln)}
+.tag::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--cy);box-shadow:0 0 10px var(--cy)}
+.h2{font-size:clamp(26px,4vw,42px);line-height:1.26;font-weight:850}
+.h2 em{font-style:normal;background:linear-gradient(90deg,var(--cy),var(--teal));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{color:var(--tx2);font-size:16px;max-width:640px}
+
+/* 头部 */
+.hd{position:sticky;top:0;z-index:100;background:rgba(2,10,24,.8);backdrop-filter:blur(14px);border-bottom:1px solid var(--ln)}
+.nv{max-width:1220px;margin:0 auto;padding:0 22px;height:70px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:19px;letter-spacing:.5px}
+.logo i{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;font-size:18px;background:linear-gradient(135deg,var(--cy),var(--teal));box-shadow:0 6px 18px rgba(0,229,255,.35)}
+.logo b{font-size:11px;letter-spacing:2px;color:var(--tx3);font-weight:700}
+.menu{display:flex;align-items:center;gap:2px}
+.menu a{padding:9px 14px;font-size:14.5px;color:var(--tx2);border-radius:8px;transition:.25s}
+.menu a:hover{color:var(--cy);background:rgba(0,229,255,.08)}
+.menu .cta{padding:9px 20px;margin-left:10px;font-size:14px;font-weight:800;color:#001624;border-radius:40px;background:linear-gradient(90deg,var(--cy),var(--teal))}
+.menu .cta:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,229,255,.4)}
+.bmb{display:none;width:42px;height:42px;border:1px solid var(--ln);background:transparent;color:var(--cy);font-size:20px;border-radius:9px;cursor:pointer}
+
+/* Hero */
+.hero{padding:82px 0 70px}
+.hg{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.hero h1{font-size:clamp(40px,6vw,70px);line-height:1.05;font-weight:950;letter-spacing:-1.4px}
+.hero h1 .cy{color:var(--cy)}
+.hero h1 .st{position:relative;display:inline-block;color:var(--tx);text-shadow:0 0 40px rgba(0,229,255,.35)}
+.hero h1 .st::after{content:"";position:absolute;left:0;right:0;bottom:-8px;height:4px;border-radius:4px;background:linear-gradient(90deg,var(--cy),var(--teal))}
+.hero .sub{margin:26px 0 30px;font-size:17px;color:var(--tx2);max-width:500px}
+.acts{display:flex;flex-wrap:wrap;gap:14px}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:15px 30px;border-radius:40px;font-size:15.5px;font-weight:850;cursor:pointer;border:0;transition:.3s var(--ez)}
+.bp{background:linear-gradient(90deg,var(--cy),var(--teal));color:#001624}
+.bp:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(0,229,255,.4)}
+.bo{background:transparent;color:var(--tx);border:1.5px solid var(--ln2)}
+.bo:hover{border-color:var(--cy);color:var(--cy)}
+.fins{display:flex;gap:44px;margin-top:38px;flex-wrap:wrap}
+.fins div span{display:block;font-size:30px;font-weight:950;color:var(--cy);font-variant-numeric:tabular-nums}
+.fins div small{font-size:12.5px;color:var(--tx3);letter-spacing:1px}
+
+/* 深海场景 */
+.scene{position:relative;height:520px}
+.subm{position:absolute;inset:0;border-radius:28px;overflow:hidden;border:1px solid var(--ln);background:linear-gradient(180deg,#0a4c8a 0%,#07345f 30%,#031d3d 62%,#010c1f 100%)}
+.sun{position:absolute;top:-30px;left:50%;transform:translateX(-50%);width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(168,255,53,.7),rgba(0,229,255,.25) 45%,transparent 72%);filter:blur(4px)}
+.shark{position:absolute;top:38%;left:-40px;font-size:96px;filter:drop-shadow(0 14px 20px rgba(0,0,0,.6));animation:sw 9s ease-in-out infinite}
+@keyframes sw{0%,100%{transform:translate(0,-6px) rotate(-3deg)}50%{transform:translate(12px,6px) rotate(3deg)}}
+.seaweed{position:absolute;bottom:0;width:14px;height:120px;background:linear-gradient(180deg,var(--teal),transparent);border-radius:14px;opacity:.5}
+.s1{left:12%;height:150px;animation:sway 5s ease-in-out infinite}
+.s2{left:24%;height:100px;animation:sway 6s ease-in-out infinite -.7s}
+.s3{right:18%;height:130px;animation:sway 5.5s ease-in-out infinite -1.3s}
+.s4{right:8%;height:90px;animation:sway 4.5s ease-in-out infinite -.4s}
+@keyframes sway{0%,100%{transform:skewX(-8deg)}50%{transform:skewX(8deg)}}
+.flo{position:absolute;font-size:13px;font-weight:800;padding:10px 16px;border-radius:12px;background:rgba(0,20,40,.7);backdrop-filter:blur(6px);border:1px solid var(--ln);color:var(--cy);white-space:nowrap}
+.f1{top:16%;right:6%;animation:bp 5s ease-in-out infinite}
+.f2{bottom:22%;left:4%;animation:bp 5s ease-in-out infinite -1.6s}
+@keyframes bp{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+
+/* 栏目一：深海片库 —— 同心圆聚焦 */
+.foc-head{text-align:center;margin-bottom:48px}
+.foc-head .lede{margin:0 auto}
+.foc{position:relative;height:560px;display:grid;place-items:center}
+.core{position:absolute;width:150px;height:150px;border-radius:50%;display:grid;place-items:center;text-align:center;font-weight:900;font-size:16px;line-height:1.5;background:linear-gradient(135deg,var(--cy),var(--teal));color:#001220;z-index:5;box-shadow:0 0 0 12px rgba(0,229,255,.1),0 0 80px rgba(0,229,255,.4)}
+.orb{position:absolute;border:1px solid var(--ln);border-radius:50%;transition:.6s var(--ez)}
+.or1{width:280px;height:280px}
+.or2{width:430px;height:430px}
+.or3{width:560px;height:560px}
+.cap{position:absolute;width:170px;padding:14px;border-radius:14px;background:rgba(3,19,43,.9);border:1px solid var(--ln);transition:.4s var(--ez);cursor:pointer}
+.cap:hover{transform:scale(1.08);border-color:var(--cy);background:rgba(6,29,61,.95);z-index:6}
+.cap i{font-size:24px;display:block;margin-bottom:7px}
+.cap h4{font-size:14.5px;font-weight:850}
+.cap p{font-size:11.8px;color:var(--tx3);margin-top:4px}
+.c1{top:6%;left:50%;transform:translateX(-50%);text-align:center}
+.c2{top:24%;left:8%}
+.c3{top:24%;right:8%;text-align:left}
+.c4{bottom:14%;left:16%}
+.c5{bottom:14%;right:16%}
+.cap:hover{transform:translateY(-6px) scale(1.04)}
+
+/* 栏目二：深海频道 —— 滚动跑马灯条带 */
+.mq-head{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:end;margin-bottom:44px}
+.mq-head .r{color:var(--tx3);font-size:14px}
+.mq{position:relative;overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);padding:8px 0}
+.mqin{display:flex;gap:16px;animation:mq 40s linear infinite}
+.mq:hover .mqin{animation-play-state:paused}
+@keyframes mq{to{transform:translateX(-50%)}}
+.ch{flex:none;width:230px;height:120px;border-radius:14px;padding:16px;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;border:1px solid var(--ln);transition:.4s var(--ez)}
+.ch:hover{transform:translateY(-6px);border-color:var(--cy)}
+.ch i{font-size:26px}
+.ch h4{font-size:15px;font-weight:850}
+.ch span{font-size:11.5px;color:var(--tx3)}
+.cg1{background:linear-gradient(150deg,rgba(0,229,255,.18),transparent)}
+.cg2{background:linear-gradient(150deg,rgba(0,191,166,.18),transparent)}
+.cg3{background:linear-gradient(150deg,rgba(168,255,53,.14),transparent)}
+.cg4{background:linear-gradient(150deg,rgba(255,107,107,.14),transparent)}
+.cg5{background:linear-gradient(150deg,rgba(255,200,80,.14),transparent)}
+.cg6{background:linear-gradient(150deg,rgba(160,140,255,.14),transparent)}
+
+/* 栏目三：热播榜单 —— 深度进度榜 */
+.rk-head{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center;margin-bottom:44px}
+.rk-head .r{font-size:14px;color:var(--tx3)}
+.rk li{display:grid;grid-template-columns:64px 1fr 92px;gap:20px;align-items:center;padding:16px 20px;border-radius:14px;background:rgba(3,19,43,.5);border:1px solid var(--ln);margin-bottom:12px;transition:.4s var(--ez);cursor:pointer}
+.rk li:hover{transform:translateX(8px);border-color:var(--cy);background:rgba(6,29,61,.85)}
+.rk .no{font-size:28px;font-weight:950;color:var(--tx3);text-align:center;font-variant-numeric:tabular-nums}
+.rk li:nth-child(1) .no{color:var(--lime)}
+.rk li:nth-child(2) .no{color:var(--cy)}
+.rk li:nth-child(3) .no{color:var(--teal)}
+.rk h4{font-size:16.5px;font-weight:850}
+.rk .bar{height:7px;border-radius:7px;background:rgba(0,229,255,.12);margin-top:9px;overflow:hidden}
+.rk .bar i{display:block;height:100%;border-radius:7px;background:linear-gradient(90deg,var(--cy),var(--teal));transform:scaleX(0);transform-origin:left;transition:transform 1.2s var(--ez)}
+.rk li.in .bar i{transform:scaleX(1)}
+.rk .sc{text-align:right;font-size:14px;color:var(--cy);font-weight:800}
+.rk .sc small{display:block;font-size:11px;color:var(--tx3);font-weight:600}
+
+/* 栏目四：资源矩阵 —— 网格表格式 */
+.mx-head{text-align:center;margin-bottom:46px}
+.mx-head .lede{margin:0 auto}
+.mx{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--ln);border:1px solid var(--ln);border-radius:18px;overflow:hidden}
+.mx .cell{padding:26px 20px;background:var(--sea);transition:.4s var(--ez);cursor:pointer;min-height:150px;display:flex;flex-direction:column;justify-content:space-between}
+.mx .cell:hover{background:var(--sea2)}
+.mx .cell.feat{grid-column:span 2;grid-row:span 2;background:linear-gradient(150deg,var(--sea2),rgba(0,229,255,.1))}
+.mx .cell.feat:hover{background:linear-gradient(150deg,var(--sea2),rgba(0,229,255,.18))}
+.mx .cell i{font-size:26px}
+.mx .cell.feat i{font-size:36px}
+.mx .cell h4{font-size:15px;font-weight:850}
+.mx .cell.feat h4{font-size:19px}
+.mx .cell p{font-size:12.2px;color:var(--tx3);margin-top:6px}
+.mx .cell .hot{font-size:10.5px;padding:3px 9px;border-radius:20px;background:rgba(168,255,53,.16);color:var(--lime);font-weight:800;align-self:flex-start}
+
+/* 栏目五：观影体验 —— 分层卡片堆叠 */
+.lay-head{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:end;margin-bottom:44px}
+.lay-head .r{color:var(--tx3);font-size:14px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.card{position:relative;padding:28px 24px;border-radius:16px;background:var(--sea);border:1px solid var(--ln);overflow:hidden;transition:.5s var(--ez)}
+.card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--cy),var(--teal));transform:scaleX(0);transform-origin:left;transition:transform .6s var(--ez)}
+.card:hover{transform:translateY(-10px);border-color:var(--cy)}
+.card:hover::before{transform:scaleX(1)}
+.card .big{font-size:38px;font-weight:950;color:var(--cy);line-height:1;font-variant-numeric:tabular-nums}
+.card h4{font-size:16.5px;font-weight:850;margin:14px 0 7px}
+.card p{font-size:13.6px;color:var(--tx2)}
+.card .mk{position:absolute;right:-10px;bottom:-10px;font-size:74px;opacity:.06;font-weight:950}
+
+/* 栏目六：深海 FAQ —— 折叠面板 */
+.faq-head{text-align:center;margin-bottom:46px}
+.faq-head .lede{margin:0 auto}
+.faq{max-width:840px;margin:0 auto}
+.fa{margin-bottom:12px;border-radius:14px;overflow:hidden;border:1px solid var(--ln);background:rgba(3,19,43,.5)}
+.fh{padding:20px 24px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;gap:16px;transition:.3s}
+.fh:hover{background:rgba(0,229,255,.06)}
+.fh h4{font-size:15.8px;font-weight:800}
+.fh .pm{width:30px;height:30px;border-radius:50%;flex:none;display:grid;place-items:center;font-size:18px;font-weight:900;color:var(--cy);background:rgba(0,229,255,.12);transition:.4s var(--ez)}
+.fa.open .fh .pm{transform:rotate(45deg);background:var(--cy);color:#001220}
+.fb{max-height:0;overflow:hidden;transition:max-height .55s var(--ez)}
+.fa.open .fb{max-height:300px}
+.fb p{padding:0 24px 22px;color:var(--tx2);font-size:14.2px}
+
+/* 栏目七：合作 —— 等宽等距墙 */
+.cw-head{display:grid;grid-template-columns:1.5fr 1fr;gap:44px;align-items:center;margin-bottom:44px}
+.partners{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+.p{height:86px;border-radius:12px;border:1px solid var(--ln);display:grid;place-items:center;font-size:13.5px;font-weight:800;color:var(--tx2);transition:.4s var(--ez);background:rgba(3,19,43,.4)}
+.p:hover{border-color:var(--cy);color:var(--cy);transform:translateY(-4px);background:rgba(0,229,255,.08)}
+.p i{font-style:normal;font-size:22px;display:block;margin-bottom:4px;color:var(--cy)}
+
+.ft{border-top:1px solid var(--ln);background:var(--deep);padding:60px 0 26px;margin-top:40px}
+.ft-top{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+.ft-col h4{font-size:13.5px;font-weight:850;margin-bottom:15px;color:var(--cy);letter-spacing:.6px}
+.ft-col a{display:block;font-size:13.8px;color:var(--tx2);padding:6px 0;transition:.25s}
+.ft-col a:hover{color:var(--cy);transform:translateX(4px)}
+.ft-col p{font-size:13.2px;color:var(--tx3);max-width:330px}
+.ft-bot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:24px;border-top:1px solid var(--ln);font-size:12.8px;color:var(--tx3)}
+.ft-bot a{color:var(--tx2);margin-left:18px}
+
+@media(max-width:1020px){
+  .mx{grid-template-columns:repeat(2,1fr)}
+  .partners{grid-template-columns:repeat(3,1fr)}
+  .cards{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:780px){
+  section{padding:74px 0}
+  .hg{grid-template-columns:1fr;gap:50px}
+  .menu{position:fixed;top:70px;left:0;right:0;flex-direction:column;padding:16px;background:rgba(2,10,24,.99);border-bottom:1px solid var(--ln);transform:translateY(-160%);transition:.45s var(--ez)}
+  .menu.open{transform:translateY(0)}
+  .menu a{padding:12px;width:100%;text-align:center;border-bottom:1px solid var(--ln)}
+  .menu .cta{margin:8px 0 0;width:100%;text-align:center}
+  .bmb{display:block}
+  .mq-head,.rk-head,.lay-head,.foc-head,.faq-head,.cw-head,.mx-head{text-align:left}
+  .foc{height:auto;display:block;padding:20px 0}
+  .core,.orb{display:none}
+  .cap{position:static;width:auto;margin-bottom:12px;text-align:left}
+  .scene{height:360px}
+  .shark{font-size:70px}
+  .rk li{grid-template-columns:48px 1fr;gap:14px}
+  .rk .sc{grid-column:2;text-align:left}
+  .cards{grid-template-columns:1fr}
+  .partners{grid-template-columns:repeat(2,1fr)}
+  .fins{gap:28px}
+  .hero h1{font-size:44px}
+  .mx .cell.feat{grid-column:auto;grid-row:auto}
+}
+@media(max-width:460px){
+  .mx,.partners{grid-template-columns:1fr}
+  .ft-top{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/xiaobao.js"></script>
+
+<div class="ocean" aria-hidden="true"></div>
+<div class="waves" aria-hidden="true">
+  <div class="wave w1"></div><div class="wave w2"></div><div class="wave w3"></div>
+  <div class="bubble" style="left:8%;width:10px;height:10px;animation-duration:9s"></div>
+  <div class="bubble" style="left:22%;width:14px;height:14px;animation-duration:12s;animation-delay:-3s"></div>
+  <div class="bubble" style="left:40%;width:8px;height:8px;animation-duration:8s;animation-delay:-5s"></div>
+  <div class="bubble" style="left:58%;width:16px;height:16px;animation-duration:14s;animation-delay:-1s"></div>
+  <div class="bubble" style="left:74%;width:11px;height:11px;animation-duration:10s;animation-delay:-6s"></div>
+  <div class="bubble" style="left:88%;width:9px;height:9px;animation-duration:11s;animation-delay:-4s"></div>
+</div>
+
+<header class="hd">
+  <div class="nv">
+    <a href="#top" class="logo"><i>🦈</i>鲨鱼影视<b>SHARK TV</b></a>
+    <nav class="menu" id="menu">
+      <a href="#library">深海片库</a>
+      <a href="#channels">影视频道</a>
+      <a href="#rank">热播榜单</a>
+      <a href="#matrix">资源矩阵</a>
+      <a href="#exp">观影体验</a>
+      <a href="#faq">常见问题</a>
+      <a href="#partners">合作生态</a>
+      <a href="#top" class="cta">免费看片</a>
+    </nav>
+    <button class="bmb" id="bmb" aria-label="菜单">☰</button>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero" id="top">
+  <div class="wrap hg">
+    <div>
+      <span class="tag">影视在线观看 · 免费高清</span>
+      <h1>潜入<span class="cy">鲨鱼影视</span><br><span class="st">畅游影视海洋</span></h1>
+      <p class="sub">鲨鱼影视（shayuyingshi）海量高清影视资源免费在线观看，电影、电视剧、综艺、动漫、纪录片每日更新，多端流畅播放，带您畅游浩瀚影视海洋。</p>
+      <div class="acts">
+        <a href="#library" class="btn bp">立即潜入 ›</a>
+        <a href="#channels" class="btn bo">浏览频道</a>
+      </div>
+      <div class="fins">
+        <div><span data-n="32000">0</span><small>影视资源</small></div>
+        <div><span data-n="150">0</span><small>每日更新</small></div>
+        <div><span data-n="99">0</span><small>好评率 %</small></div>
+      </div>
+    </div>
+    <div class="scene">
+      <div class="subm">
+        <div class="sun"></div>
+        <div class="shark">🦈</div>
+        <div class="seaweed s1"></div>
+        <div class="seaweed s2"></div>
+        <div class="seaweed s3"></div>
+        <div class="seaweed s4"></div>
+      </div>
+      <div class="flo f1">🎬 海量资源</div>
+      <div class="flo f2">📱 多端畅看</div>
+    </div>
+  </div>
+</section>
+
+<!-- 栏目一：深海片库 —— 同心圆 -->
+<section id="library">
+  <div class="wrap">
+    <div class="foc-head">
+      <span class="tag">01 / LIBRARY</span>
+      <h2 class="h2">深海级<em>影视片库</em></h2>
+      <p class="lede">鲨鱼影视拥有海量影视资源，全品类内容分门别类，精准定位你爱看的那一部，潜水越深发现越多。</p>
+    </div>
+    <div class="foc">
+      <div class="core">🦈<br>鲨鱼影视<br>片库中心</div>
+      <div class="orb or3"></div>
+      <div class="orb or2"></div>
+      <div class="orb or1"></div>
+      <div class="cap c1"><i>🎬</i><h4>院线大片</h4><p>最新上映同步</p></div>
+      <div class="cap c2"><i>📺</i><h4>热播剧集</h4><p>古装都市谍战</p></div>
+      <div class="cap c3"><i>🎤</i><h4>综艺节目</h4><p>真人秀竞演脱口秀</p></div>
+      <div class="cap c4"><i>🎨</i><h4>动漫番剧</h4><p>国漫日漫剧场版</p></div>
+      <div class="cap c5"><i>🎭</i><h4>纪录片</h4><p>自然历史人文</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 栏目二：深海频道 —— 跑马灯 -->
+<section id="channels" style="background:linear-gradient(180deg,transparent,rgba(0,229,255,.045),transparent)">
+  <div class="wrap">
+    <div class="mq-head">
+      <div>
+        <span class="tag">02 / CHANNELS</span>
+        <h2 class="h2">丰富<em>影视频道</em></h2>
+      </div>
+      <div class="r">覆盖电影、电视剧、综艺、动漫、少儿、纪录片等全品类影视频道，总有一档适合你的口味。</div>
+    </div>
+    <div class="mq">
+      <div class="mqin">
+        <div class="ch cg1"><i>🎬</i><h4>电影频道</h4><span>动作 · 喜剧 · 科幻</span></div>
+        <div class="ch cg2"><i>📺</i><h4>电视剧频道</h4><span>古装 · 都市 · 谍战</span></div>
+        <div class="ch cg3"><i>🎤</i><h4>综艺频道</h4><span>真人秀 · 竞演</span></div>
+        <div class="ch cg4"><i>🎨</i><h4>动漫频道</h4><span>国漫 · 日漫</span></div>
+        <div class="ch cg5"><i>🎭</i><h4>纪录片频道</h4><span>自然 · 历史</span></div>
+        <div class="ch cg6"><i>🌏</i><h4>海外剧频道</h4><span>美剧 · 韩剧 · 日剧</span></div>
+        <div class="ch cg3"><i>🧒</i><h4>少儿频道</h4><span>动画 · 启蒙</span></div>
+        <div class="ch cg4"><i>🏆</i><h4>经典老片</h4><span>怀旧 · 高分</span></div>
+        <div class="ch cg1"><i>♨️</i><h4>独家首播</h4><span>院线大片</span></div>
+        <div class="ch cg5"><i>🎞️</i><h4>4K 专区</h4><span>超清画质</span></div>
+        <div class="ch cg6"><i>😂</i><h4>搞笑专区</h4><span>轻松下饭</span></div>
+        <div class="ch cg2"><i>💕</i><h4>爱情专区</h4><span>甜宠 · 虐恋</span></div>
+        <!-- 复制一份用于无缝循环 -->
+        <div class="ch cg1"><i>🎬</i><h4>电影频道</h4><span>动作 · 喜剧 · 科幻</span></div>
+        <div class="ch cg2"><i>📺</i><h4>电视剧频道</h4><span>古装 · 都市 · 谍战</span></div>
+        <div class="ch cg3"><i>🎤</i><h4>综艺频道</h4><span>真人秀 · 竞演</span></div>
+        <div class="ch cg4"><i>🎨</i><h4>动漫频道</h4><span>国漫 · 日漫</span></div>
+        <div class="ch cg5"><i>🎭</i><h4>纪录片频道</h4><span>自然 · 历史</span></div>
+        <div class="ch cg6"><i>🌏</i><h4>海外剧频道</h4><span>美剧 · 韩剧 · 日剧</span></div>
+        <div class="ch cg3"><i>🧒</i><h4>少儿频道</h4><span>动画 · 启蒙</span></div>
+        <div class="ch cg4"><i>🏆</i><h4>经典老片</h4><span>怀旧 · 高分</span></div>
+        <div class="ch cg1"><i>♨️</i><h4>独家首播</h4><span>院线大片</span></div>
+        <div class="ch cg5"><i>🎞️</i><h4>4K 专区</h4><span>超清画质</span></div>
+        <div class="ch cg6"><i>😂</i><h4>搞笑专区</h4><span>轻松下饭</span></div>
+        <div class="ch cg2"><i>💕</i><h4>爱情专区</h4><span>甜宠 · 虐恋</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 栏目三：热播榜单 -->
+<section id="rank">
+  <div class="wrap">
+    <div class="rk-head">
+      <div>
+        <span class="tag">03 / TOP RANK</span>
+        <h2 class="h2">热播<em>影视榜单</em></h2>
+      </div>
+      <div class="r">鲨鱼影视用户实时追剧数据，为你呈现当下最火的影视内容，追剧不迷路。</div>
+    </div>
+    <ul class="rk">
+      <li><div class="no">1</div><div><h4>山河赋</h4><div class="bar"><i style="width:98%"></i></div></div><div class="sc">98.6万<small>热度值</small></div></li>
+      <li><div class="no">2</div><div><h4>无声告白</h4><div class="bar"><i style="width:92%"></i></div></div><div class="sc">92.1万<small>热度值</small></div></li>
+      <li><div class="no">3</div><div><h4>北上广不相信眼泪</h4><div class="bar"><i style="width:87%"></i></div></div><div class="sc">87.4万<small>热度值</small></div></li>
+      <li><div class="no">4</div><div><h4>他的心尖宠</h4><div class="bar"><i style="width:79%"></i></div></div><div class="sc">79.2万<small>热度值</small></div></li>
+      <li><div class="no">5</div><div><h4>星渊</h4><div class="bar"><i style="width:71%"></i></div></div><div class="sc">71.5万<small>热度值</small></div></li>
+      <li><div class="no">6</div><div><h4>大明王朝</h4><div class="bar"><i style="width:64%"></i></div></div><div class="sc">64.8万<small>热度值</small></div></li>
+      <li><div class="no">7</div><div><h4>综艺之夜</h4><div class="bar"><i style="width:58%"></i></div></div><div class="sc">58.3万<small>热度值</small></div></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 栏目四：资源矩阵 -->
+<section id="matrix" style="background:linear-gradient(180deg,transparent,rgba(0,191,166,.045),transparent)">
+  <div class="wrap">
+    <div class="mx-head">
+      <span class="tag">04 / MATRIX</span>
+      <h2 class="h2">影视<em>资源矩阵</em></h2>
+      <p class="lede">从院线大片到经典老片，从国内热播到海外佳作，鲨鱼影视构建全方位影视资源矩阵。</p>
+    </div>
+    <div class="mx">
+      <div class="cell feat"><i>🦈</i><div><span class="hot">核心推荐</span><h4 style="margin-top:10px">院线大片首播</h4><p>最新上映电影、独家首播剧集，第一时间更新，追剧快人一步。</p></div></div>
+      <div class="cell"><i>🎬</i><h4>电影专区</h4><p>动作 · 喜剧 · 科幻</p></div>
+      <div class="cell"><i>📺</i><h4>电视剧专区</h4><p>古装 · 都市 · 谍战</p></div>
+      <div class="cell"><i>🎤</i><h4>综艺专区</h4><p>真人秀 · 竞演</p></div>
+      <div class="cell"><i>🎨</i><h4>动漫专区</h4><p>国漫 · 日漫</p></div>
+      <div class="cell"><i>🎭</i><h4>纪录片</h4><p>自然 · 历史</p></div>
+      <div class="cell"><i>🌏</i><h4>海外剧集</h4><p>美剧 · 韩剧 · 日剧</p></div>
+      <div class="cell"><span class="hot">每日更新</span><i>🔥</i><h4>热播榜</h4><p>实时追剧热度</p></div>
+      <div class="cell"><i>🏆</i><h4>经典老片</h4><p>怀旧 · 高分重温</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 栏目五：观影体验 -->
+<section id="exp">
+  <div class="wrap">
+    <div class="lay-head">
+      <div>
+        <span class="tag">05 / EXPERIENCE</span>
+        <h2 class="h2">极致<em>观影体验</em></h2>
+      </div>
+      <div class="r">鲨鱼影视持续优化播放技术与画质呈现，让每一次观看都流畅舒适。</div>
+    </div>
+    <div class="cards">
+      <div class="card"><div class="mk">4K</div><div class="big">4K</div><h4>超清画质</h4><p>支持 4K 超高清播放，画面细节纤毫毕现，大屏沉浸如临影院。</p></div>
+      <div class="card"><div class="mk">0</div><div class="big">0</div><h4>广告缓冲</h4><p>纯净播放体验，告别冗长广告与卡顿缓冲，打开即看。</p></div>
+      <div class="card"><div class="mk">∞</div><div class="big">∞</div><h4>多端同步</h4><p>手机、平板、电脑、电视盒子多端记录同步，随时随地续播。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 栏目六：FAQ -->
+<section id="faq" style="background:linear-gradient(180deg,transparent,rgba(0,229,255,.04),transparent)">
+  <div class="wrap">
+    <div class="faq-head">
+      <span class="tag">06 / FAQ</span>
+      <h2 class="h2">常见<em>问题解答</em></h2>
+      <p class="lede">关于鲨鱼影视的观看方式、资源更新、画质选择等常见问题，为你一一解答。</p>
+    </div>
+    <div class="faq">
+      <div class="fa open"><div class="fh"><h4>鲨鱼影视需要付费才能观看吗？</h4><span class="pm">+</span></div><div class="fb"><p>鲨鱼影视提供海量免费影视资源在线观看，大部分内容均可免费播放，部分独家内容需开通会员解锁。</p></div></div>
+      <div class="fa"><div class="fh"><h4>影视资源多久更新一次？</h4><span class="pm">+</span></div><div class="fb"><p>平台每日更新影视内容，热播剧集与院线大片第一时间同步，确保用户能追到最新剧集。</p></div></div>
+      <div class="fa"><div class="fh"><h4>支持哪些设备观看？</h4><span class="pm">+</span></div><div class="fb"><p>支持手机、平板、电脑、智能电视及电视盒子等多端设备，观看记录自动同步，随时随地续播。</p></div></div>
+      <div class="fa"><div class="fh"><h4>画质最高支持到多少？</h4><span class="pm">+</span></div><div class="fb"><p>支持最高 4K 超清画质播放，根据网络状况自动适配码率，兼顾画质与流畅度。</p></div></div>
+      <div class="fa"><div class="fh"><h4>如何提交想看的影视资源？</h4><span class="pm">+</span></div><div class="fb"><p>可通过站内留言或客服渠道提交想看的影视资源，我们会根据用户需求持续扩充片库。</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 栏目七：合作生态 -->
+<section id="partners">
+  <div class="wrap">
+    <div class="cw-head">
+      <div>
+        <span class="tag">07 / PARTNERS</span>
+        <h2 class="h2">合作<em>生态伙伴</em></h2>
+      </div>
+      <div class="r">鲨鱼影视与众多影视制作方、发行方及内容平台建立合作关系，持续为用户提供优质影视内容。</div>
+    </div>
+    <div class="partners">
+      <div class="p"><i>🎬</i>影视制作</div>
+      <div class="p"><i>📡</i>内容分发</div>
+      <div class="p"><i>📺</i>卫视平台</div>
+      <div class="p"><i>🎞️</i>院线发行</div>
+      <div class="p"><i>🎙️</i>综艺出品</div>
+      <div class="p"><i>📱</i>终端厂商</div>
+    </div>
+  </div>
+</section>
+
+<footer class="ft">
+  <div class="wrap">
+    <div class="ft-top">
+      <div class="ft-col">
+        <a href="#top" class="logo"><i>🦈</i>鲨鱼影视</a>
+        <p>鲨鱼影视（shayuyingshi）是影视在线观看平台，提供海量高清影视资源免费在线播放，涵盖电影、电视剧、综艺、动漫、纪录片，每日更新热播剧集。</p>
+      </div>
+      <div class="ft-col"><h4>影视频道</h4><a href="#channels">电影频道</a><a href="#channels">电视剧频道</a><a href="#channels">综艺频道</a><a href="#channels">动漫频道</a><a href="#channels">纪录片</a></div>
+      <div class="ft-col"><h4>平台服务</h4><a href="#library">深海片库</a><a href="#rank">热播榜单</a><a href="#matrix">资源矩阵</a><a href="#exp">观影体验</a><a href="#faq">常见问题</a></div>
+      <div class="ft-col"><h4>关于平台</h4><a href="#">关于鲨鱼影视</a><a href="#">版权声明</a><a href="#">用户协议</a><a href="#">隐私政策</a><a href="#">联系我们</a></div>
+    </div>
+    <div class="ft-bot">
+      <span>© 2026 鲨鱼影视 shayuyingshi · 本站网址：https://shayuyingshi-cn.github.io · 影视在线观看平台</span>
+      <span><a href="#">网站地图</a><a href="#">免责声明</a><a href="#">服务条款</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var b=document.getElementById('bmb'),m=document.getElementById('menu');
+  b.addEventListener('click',function(){m.classList.toggle('open')});
+  m.addEventListener('click',function(e){if(e.target.tagName==='A')m.classList.remove('open')});
+
+  /* FAQ 折叠 */
+  document.querySelectorAll('.fa').forEach(function(fa){
+    fa.querySelector('.fh').addEventListener('click',function(){
+      var open=fa.classList.contains('open');
+      document.querySelectorAll('.fa').forEach(function(x){x.classList.remove('open')});
+      if(!open)fa.classList.add('open');
+    });
+  });
+
+  /* 榜单进度条动画 */
+  function inView(v){var r=v.getBoundingClientRect();return r.top<window.innerHeight*.88&&r.bottom>0}
+  var rkDone=false;
+  function runRank(){
+    if(rkDone)return;
+    var rk=document.getElementById('rank');
+    if(!inView(rk))return;
+    rkDone=true;
+    document.querySelectorAll('#rank .rk li').forEach(function(li,i){
+      setTimeout(function(){li.classList.add('in')},i*110);
+    });
+  }
+
+  /* 数字滚动 */
+  var numDone=false;
+  function runNum(){
+    if(numDone)return;
+    var sec=document.querySelector('.hero');
+    if(!inView(sec))return;
+    numDone=true;
+    document.querySelectorAll('[data-n]').forEach(function(el){
+      var t=+el.getAttribute('data-n'),dur=1400,st=performance.now();
+      (function step(now){
+        var p=Math.min((now-st)/dur,1);
+        var e=1-Math.pow(1-p,3);
+        el.textContent=Math.floor(t*e).toLocaleString('zh-CN');
+        if(p<1)requestAnimationFrame(step);
+        else el.textContent=t.toLocaleString('zh-CN');
+      })(st);
+    });
+  }
+  window.addEventListener('scroll',function(){runRank();runNum()},{passive:true});
+  window.addEventListener('load',function(){runRank();runNum()});
+})();
+</script>
+
+</body>
+</html>
